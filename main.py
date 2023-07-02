@@ -34,7 +34,13 @@ def is_bitlink(url, token):
 if __name__ == '__main__':
     dotenv_path = join(dirname(__file__), '.env')
     load_dotenv(dotenv_path)
-    token = os.environ.get("BITLY_TOKEN")
+
+    try:
+        token = os.environ["BITLY_TOKEN"]
+    except KeyError:
+        print("Вы не заполнили токен")
+        exit()
+
     print("Введите ссылку:")
     user_input = input()
 
