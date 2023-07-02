@@ -27,8 +27,7 @@ def is_bitlink(url, token):
     url_obj = urlparse(url)
     headers = {'Authorization': f"Bearer {token}"}
     response = requests.get(f"https://api-ssl.bitly.com/v4/bitlinks/{url_obj.netloc}{url_obj.path}", headers=headers)
-    response.raise_for_status()
-    return True
+    return response.ok
 
 
 if __name__ == '__main__':
@@ -44,11 +43,7 @@ if __name__ == '__main__':
     print("Введите ссылку:")
     user_input = input()
 
-    try:
-        bitlnk = is_bitlink(user_input, token)
-    except requests.exceptions.HTTPError as e:
-        bitlnk = False
-
+    bitlnk = is_bitlink(user_input, token)
     if bitlnk:
         try:
             clicks = count_clicks(user_input, token)
