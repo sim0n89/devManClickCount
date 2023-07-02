@@ -9,24 +9,24 @@ def shorten_link(longLink, TOKEN):
     headers = {'Authorization': f"Bearer {TOKEN}"}
     response = requests.post("https://api-ssl.bitly.com/v4/bitlinks", headers=headers, json={"long_url": longLink})
     response.raise_for_status()
-    responseJson = response.json()
-    return responseJson['link']
+    response_json = response.json()
+    return response_json['link']
 
 
 def count_clicks(link, token):
-    urlObj = urlparse(link)
+    url_obj = urlparse(link)
     headers = {'Authorization': f"Bearer {token}"}
-    url = f"https://api-ssl.bitly.com/v4/bitlinks/{urlObj.netloc}{urlObj.path}/clicks/summary"
+    url = f"https://api-ssl.bitly.com/v4/bitlinks/{url_obj.netloc}{url_obj.path}/clicks/summary"
     response = requests.get(url, headers=headers)
     response.raise_for_status()
-    responseJson = response.json()
-    return responseJson['total_clicks']
+    response_json = response.json()
+    return response_json['total_clicks']
 
 
 def is_bitlink(url, token):
-    urlObj = urlparse(url)
+    url_obj = urlparse(url)
     headers = {'Authorization': f"Bearer {token}"}
-    response = requests.get(f"https://api-ssl.bitly.com/v4/bitlinks/{urlObj.netloc}{urlObj.path}", headers=headers)
+    response = requests.get(f"https://api-ssl.bitly.com/v4/bitlinks/{url_obj.netloc}{url_obj.path}", headers=headers)
     response.raise_for_status()
     return True
 
