@@ -37,8 +37,7 @@ if __name__ == '__main__':
     try:
         token = os.environ["BITLY_TOKEN"]
     except KeyError:
-        print("Вы не заполнили токен")
-        exit()
+        quit("Вы не заполнили токен")
 
     print("Введите ссылку:")
     user_input = input()
