@@ -1,9 +1,9 @@
-import pprint
 import requests
 from urllib.parse import urlparse
 import os
 from dotenv import load_dotenv
 from os.path import join, dirname
+
 
 def shorten_link(long_link, token):
     headers = {'Authorization': f"Bearer {token}"}
@@ -55,7 +55,3 @@ if __name__ == '__main__':
             print(bitlink)
         except requests.exceptions.HTTPError:
             print("Вы ввели неверную ссылку")
-
-
-
-
