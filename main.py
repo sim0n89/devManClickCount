@@ -5,9 +5,9 @@ import os
 from dotenv import load_dotenv
 from os.path import join, dirname
 
-def shorten_link(longLink, TOKEN):
-    headers = {'Authorization': f"Bearer {TOKEN}"}
-    response = requests.post("https://api-ssl.bitly.com/v4/bitlinks", headers=headers, json={"long_url": longLink})
+def shorten_link(long_link, token):
+    headers = {'Authorization': f"Bearer {token}"}
+    response = requests.post("https://api-ssl.bitly.com/v4/bitlinks", headers=headers, json={"long_url": long_link})
     response.raise_for_status()
     response_json = response.json()
     return response_json['link']
