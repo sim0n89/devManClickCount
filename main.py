@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 import os
 from dotenv import load_dotenv
 from os.path import join, dirname
+import argparse
 
 
 def shorten_link(long_link, token):
@@ -31,6 +32,12 @@ def is_bitlink(url, token):
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description='Вводите ссылку получаете количество кликов по ней или ее короткую версию'
+    )
+    parser.add_argument('-u', '--url', help='Ваша ссылка')
+    args = parser.parse_args()
+
     dotenv_path = join(dirname(__file__), '.env')
     load_dotenv(dotenv_path)
 
@@ -40,8 +47,11 @@ def main():
         print("Вы не заполнили токен")
         return
 
-    print("Введите ссылку:")
-    user_input = input()
+    if not args.url:
+        print("Введите ссылку:")
+        user_input = input()
+    else:
+        user_input = args.url
 
     bitlnk = is_bitlink(user_input, token)
     if bitlnk:
